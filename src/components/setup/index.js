@@ -1,45 +1,36 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
-class Joke extends Component {
-  // static propTypes = {
-  //   joke: jokeShape,
-  //   showPunchline: PropTypes.func,
-  // };
+class Setup extends Component {
+  state = {
+    setup: [],
+  };
 
-state = {
-  jokeShown: true,
-}
+  punchline = () => {
+    this.setState({
+      punchline: this.props.joke.punchline,
+    });
+  };
 
-showPunchline = () => {
-  this.setState({
-    jokeShown: !this.state.jokeShown,
-  });
-};
+  render() {
+    const { joke } = this.props;
 
-render() {
-  const { joke, showPunchline } = this.props;
-  const { jokeShown } = this.state;
-  return (
+    return (
       <div className='joke-view'>
         <div className='Joke setup'>{joke.setup}</div>
-        <div className='button'>
-          {
-            jokeShown ? (
-          <button className='btn btn-primary' onClick={this.showPunchline}>
-            Show Punchline
-          </button>
-            ) : (
-              <>
-              <div className='punchline' onClick={this.showPunchline}>{joke.punchline}</div>
-              <button className='btn btn-primary' onClick={this.showPunchline}>Get a new Joke</button>
-              </>
-            )
-          }
+        <button
+          href='#'
+          className='punchline-button'
+          id='punchline'
+          onClick={this.punchline}
+        >
+          Show punchline
+        </button>
+        <div id='punchline-section'>
+          <h3>{this.state.punchline}</h3>
         </div>
       </div>
-  );
-}
+    );
+  }
 }
 
-export default Joke;
+export default Setup;

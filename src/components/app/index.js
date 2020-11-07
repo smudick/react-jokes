@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
-import jokeData from '../../helpers/data/jokeData';
-import Joke from '../setup';
+import getJokes from '../../helpers/data/jokeData';
+import Setup from '../setup';
 
 class JokeApp extends Component {
   state = {
-    jokes: [],
-  }
+    joke: [],
+  };
 
-  componentDidMount() {
-    jokeData.getJoke().then((response) => {
+  getAJoke = () => {
+    getJokes().then((response) => {
       this.setState({
-        jokes: response,
+        joke: response,
       });
     });
-  }
+  };
 
   render() {
-    const { jokes } = this.state;
-
-    const renderJokeToDom = () => (
-     <Joke key={jokes.id} joke={jokes}/>);
-
+    const { joke } = this.state;
+    const setup = () => <Setup key={joke.id} joke={joke} />;
     return (
-      <div>
-        {renderJokeToDom()}
-      </div>
+      <>
+        <button type='button' className='btn btn-info' onClick={this.getAJoke}>
+          Get a Joke
+        </button>
+        {this.state.joke.id ? (<div>{setup()}</div>) : <></>}
+      </>
     );
   }
 }
