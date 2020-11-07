@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/App.scss';
-import JokeApp from '../components/app/index';
+import JokeApp from '../components/JokeApp/index';
 
 class App extends React.Component {
   render() {
